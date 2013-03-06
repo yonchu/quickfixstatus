@@ -14,12 +14,7 @@ set cpo&vim
 
 function! s:Cache_Quickfix()
     let b:qfstatus_list = {}
-    if exists("b:syntastic_loclist")
-        let sy = b:syntastic_loclist
-    else
-        let sy = []
-    endif
-    for allfixes in extend(extend(getqflist(), getloclist(0)), sy)
+    for allfixes in extend(getqflist(), getloclist(0))
         let err = allfixes['text']
         let err = strpart(substitute(err,'\n',' ','g'), 0, winwidth(0))
         let b:qfstatus_list[allfixes['lnum']] = err
